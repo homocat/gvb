@@ -1,0 +1,17 @@
+mysql:
+  host: 101.42.31.45
+  port: 3306
+  db: cat
+  user: homocat
+  password: admin
+  log_level: dev
+system:
+  host: "127.0.0.1"
+  port: 8080
+  env: dev
+logger:
+  level: info
+  prefix: '[gvb]'
+  director: log
+  show-line: true
+  log-in-console: true
