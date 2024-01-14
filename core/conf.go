@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"main/config"
+	"main/global"
 
 	"gopkg.in/yaml.v2"
 )
@@ -24,5 +25,5 @@ func InitConf()  {
 	}
 
 	log.Println("config load init success")
-	fmt.Println(c)
+	global.Config = c
 }
