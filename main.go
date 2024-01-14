@@ -3,6 +3,7 @@ package main
 import (
 	"main/core"
 	"main/global"
+	"main/routers"
 )
 
 func main() {
@@ -12,4 +13,10 @@ func main() {
 	global.Log = core.InitLogger()
 	// 连接数据库
 	global.DB = core.InitGorm()
+
+	router := routers.InitRouter()
+	addr := global.Config.System.Addr()
+
+	global.Log.Infof("gvb_server is running %s", addr)
+	router.Run(addr)
 }

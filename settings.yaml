@@ -8,7 +8,7 @@ mysql:
 system:
   host: "127.0.0.1"
   port: 8080
-  env: dev
+  env: release
 logger:
   level: info
   prefix: '[gvb]'
