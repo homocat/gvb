@@ -21,10 +21,10 @@ const (
 // logrus formatter
 type LogFormatter struct{}
 // log 配置
-var _log = global.Config.Logger
 
 // Format 实现 (entry *logrus.Entry) ([]byte, error) 接口
 func (t LogFormatter) Format(entry *logrus.Entry) ([]byte, error) {
+	log := global.Config.Logger
 	// 根据不同 level 显示颜色
 	var levelColor int
 	switch entry.Level {
@@ -52,10 +52,10 @@ func (t LogFormatter) Format(entry *logrus.Entry) ([]byte, error) {
 		fileVal := fmt.Sprintf("%s:%d", path.Base(entry.Caller.File), entry.Caller.Line)
 		// 自定义输出格式
 		fmt.Fprintf(b, "%s [%s] \x1b[%dm[%s]\x1b[0m %s %s %s\n", 
-		_log.Prefix, timestamp, levelColor, entry.Level, fileVal, funcVal, entry.Message)
+		log.Prefix, timestamp, levelColor, entry.Level, fileVal, funcVal, entry.Message)
 	} else {
 		fmt.Fprintf(b, "%s [%s] \x1b[%dm[%s]\x1b[0m %s\n", 
-		_log.Prefix, timestamp, levelColor, entry.Level, entry.Message)
+		log.Prefix, timestamp, levelColor, entry.Level, entry.Message)
 	}
 	return b.Bytes(), nil
 }
@@ -68,10 +68,10 @@ func InitLogger() *logrus.Logger {
 	// 设置日志的格式化器为LogFormatter
 	mLog.SetFormatter(&LogFormatter{})
 	// 设置是否返回函数名和行号
-	mLog.SetReportCaller(_log.ShowLine)
+	mLog.SetReportCaller(global.Config.Logger.ShowLine)
 
 	// 解析配置文件中的日志级别
-	level, err := logrus.ParseLevel(string(_log.Level))
+	level, err := logrus.ParseLevel(string(global.Config.Logger.Level))
 	if err != nil {
 		level = logrus.InfoLevel
 	}
@@ -87,7 +87,7 @@ func InitLogger() *logrus.Logger {
 func InitDefualtLogger() {
 	// 全局log
 	logrus.SetOutput(os.Stdout)                           // 设置输出类型
-	logrus.SetReportCaller(_log.ShowLine) // 开启返回函数名和行号
+	logrus.SetReportCaller(global.Config.Logger.ShowLine) // 开启返回函数名和行号
 	logrus.SetFormatter(LogFormatter{})                   // 设置自己定义的formatter
 	logrus.SetLevel(logrus.DebugLevel)
 }
