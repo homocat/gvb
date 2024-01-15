@@ -2,7 +2,7 @@ package core
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"log"
 	"main/config"
 	"main/global"
@@ -15,7 +15,7 @@ func InitConf()  {
 	const ConfigFile = "settings.yaml"
 	c := &config.Confige{}
 
-	yamlConfig, err := ioutil.ReadFile(ConfigFile)
+	yamlConfig, err := os.ReadFile(ConfigFile)
 	if err != nil {
 		panic(fmt.Errorf("get yaml file err: %s", err))
 	}
