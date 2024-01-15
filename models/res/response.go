@@ -29,7 +29,7 @@ func Ok(data any, msg string, c *gin.Context) {
 	Result(Success, data, msg, c)
 }
 
-func OkWithMessage(msg string, c *gin.Context)  {
+func OkWithMessage(msg string, c *gin.Context) {
 	Result(Success, map[string]any{}, msg, c)
 }
 
@@ -41,7 +41,7 @@ func Fail(data any, msg string, c *gin.Context) {
 	Result(Error, data, msg, c)
 }
 
-func FailWithMessage(msg string, c *gin.Context)  {
+func FailWithMessage(msg string, c *gin.Context) {
 	Result(Error, map[string]any{}, msg, c)
 }
 
