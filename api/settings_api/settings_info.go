@@ -1,9 +1,11 @@
 package settings_api
 
-import "github.com/gin-gonic/gin"
+import (
+	"main/models/res"
+
+	"github.com/gin-gonic/gin"
+)
 
 func (SettingsApi)SettingsInfoView(c *gin.Context)  {
-	c.JSON(200, gin.H{
-		"msg": "settings info",
-	})
+	res.Ok(map[string]any{}, "settings info", c)
 }
